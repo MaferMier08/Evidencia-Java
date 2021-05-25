@@ -57,6 +57,7 @@ public class DoctorBook {
         }
     }
 
+
     public String check(String name){
         if (doctor.containsKey(name)) {
             String specialty = doctor.get(name);
@@ -66,5 +67,6 @@ public class DoctorBook {
             return "0";
         }
     }
+
 
 }

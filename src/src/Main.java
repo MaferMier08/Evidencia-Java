@@ -6,6 +6,7 @@ public class Main {
         DoctorBook doctorBook = new DoctorBook();
         PatientBook patientBook = new PatientBook();
         AppointmentBook appointmentBook = new AppointmentBook();
+
         Scanner scanner = new Scanner(System.in);
         String user="";
         String password="";
