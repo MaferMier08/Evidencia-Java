@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args)  {
         AdminBook adminBook = new AdminBook();
         DoctorBook doctorBook = new DoctorBook();
+        PatientBook patientBook = new PatientBook();
         Scanner scanner = new Scanner(System.in);
         String user="";
         String password="";
@@ -26,6 +27,8 @@ public class Main {
             Scanner scannerMenu = new Scanner(System.in);
             System.out.println("1. Agregar a un doctor");
             System.out.println("2. Ver lista de doctores");
+            System.out.println("3. Agregar un paciente");
+            System.out.println("4. Ver lista de pacientes");
             System.out.println("0. Cerrar sesión");
             menu = scannerMenu.nextInt();
             switch (menu){
@@ -42,6 +45,20 @@ public class Main {
                 case 2:
                     doctorBook.load();
                     doctorBook.list();
+                    break;
+                case 3:
+                    Scanner scannerPN = new Scanner(System.in);
+                    System.out.println("Ingrese nombre del paciente");
+                    String patient = scannerPN.nextLine();
+                    Scanner scannerPP = new Scanner(System.in);
+                    System.out.println("Ingrese el celular de "+patient);
+                    String phone = scannerPP.nextLine();
+                    patientBook.save(phone,patient);
+                    patientBook.load();
+                    break;
+                case 4:
+                    patientBook.load();
+                    patientBook.list();
                     break;
                 case 0:
                     break;
