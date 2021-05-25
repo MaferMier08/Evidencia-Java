@@ -5,6 +5,8 @@ public class Main {
         AdminBook adminBook = new AdminBook();
         DoctorBook doctorBook = new DoctorBook();
         PatientBook patientBook = new PatientBook();
+        AppointmentBook appointmentBook = new AppointmentBook();
+
         Scanner scanner = new Scanner(System.in);
         String user="";
         String password="";
@@ -29,6 +31,7 @@ public class Main {
             System.out.println("2. Ver lista de doctores");
             System.out.println("3. Agregar un paciente");
             System.out.println("4. Ver lista de pacientes");
+            System.out.println("5. Agendar cita");
             System.out.println("0. Cerrar sesión");
             menu = scannerMenu.nextInt();
             switch (menu){
@@ -60,6 +63,37 @@ public class Main {
                     patientBook.load();
                     patientBook.list();
                     break;
+                case 5:
+                    String check = "0";
+                    String patientName="";
+                    String doctorSpeciality="";
+                    String appointmentD ="";
+                    do {
+                        patientBook.load();
+                        Scanner scannerAN = new Scanner(System.in);
+                        System.out.println("Celular del paciente?");
+                        String appointmentP = scannerAN.nextLine();
+                        patientName = patientBook.check(appointmentP);
+                    }while ("0" == patientName);
+                    do{
+                        doctorBook.load();
+                        Scanner scannerAD = new Scanner(System.in);
+                        System.out.println("Nombre del doctor?");
+                        appointmentD = scannerAD.nextLine();
+                        doctorSpeciality = doctorBook.check(appointmentD);
+                    }while(doctorSpeciality == "0");
+                    String date = "";
+                    do{
+                        appointmentBook.load();
+                        Scanner scannerADa = new Scanner(System.in);
+                        System.out.println("Fecha de la cita? (ejemplo: 13:30 1/02/21)");
+                        date = scannerADa.nextLine();
+                        check = appointmentBook.check(date);
+                    }while(check == "0");
+                    appointmentBook.save(date, patientName,appointmentD, doctorSpeciality);
+                    appointmentBook.load();
+                    break;
+
                 case 0:
                     break;
                 default:

@@ -55,8 +55,8 @@ public class AdminBook {
             return 1;
         } else {
             System.out.println("Usuario incorrecto");
+            return 0;
         }
-        return 0;
     }
 
 }

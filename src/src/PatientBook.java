@@ -57,5 +57,15 @@ public class PatientBook {
         }
     }
 
-
+    public String check(String phone){
+        if (patient.containsKey(phone)) {
+            String name = patient.get(phone);
+            return name;
+        } else {
+            System.out.println("No se encontró al paciente");
+            return "0";
+        }
+    }
 }
+
+
