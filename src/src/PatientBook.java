@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class AdminBook {
-    final static  String inputFilePath = "src/src/admin.txt";
-    HashMap<String, String> user = new HashMap<String, String>();
+public class PatientBook {
+    final static  String inputFilePath = "src/src/patient.txt";
+    HashMap<String, String> patient = new HashMap<String, String>();
     File inputFile = new File(inputFilePath);
     BufferedWriter bf = null;
     BufferedReader bfReader = null;
@@ -14,7 +14,7 @@ public class AdminBook {
             String line;
             while ((line = bfReader.readLine()) != null) {
                 String[] parts = line.split(",");
-                user.put(parts[0], parts[1]);
+                patient.put(parts[0], parts[1]);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,13 +29,13 @@ public class AdminBook {
         }
     }
 
-    public void save(String password, String user) {
-        if (password != "") {
+    public void save(String phone, String name) {
+        if (phone != "") {
             FileWriter fw = null;
             try {
                 fw = new FileWriter(inputFile, true);
                 bf = new BufferedWriter(fw);
-                bf.write(password + "," + user + "\n");
+                bf.write(phone + "," + name + "\n");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -49,14 +49,21 @@ public class AdminBook {
             }
         }else{}
     }
-    public int login(String password){
-        if (user.containsKey(password)) {
-            System.out.println("Sesión iniciada");
-            return 1;
-        } else {
-            System.out.println("Usuario incorrecto");
-            return 0;
+
+    public void list(){
+        System.out.println("Pacientes:");
+        for (String i : patient.keySet()) {
+            System.out.println("Paciente " + patient.get(i) + " celular: " + i);
         }
     }
 
+    public String check(String phone){
+        if (patient.containsKey(phone)) {
+            String name = patient.get(phone);
+            return name;
+        } else {
+            System.out.println("No se encontró al paciente");
+            return "0";
+        }
+    }
 }

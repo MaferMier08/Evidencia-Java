@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class AdminBook {
-    final static  String inputFilePath = "src/src/admin.txt";
-    HashMap<String, String> user = new HashMap<String, String>();
+public class AppointmentBook {
+    final static  String inputFilePath = "src/src/appointment.txt";
+    HashMap<String, String> appointment = new HashMap<String, String>();
     File inputFile = new File(inputFilePath);
     BufferedWriter bf = null;
     BufferedReader bfReader = null;
@@ -14,7 +14,7 @@ public class AdminBook {
             String line;
             while ((line = bfReader.readLine()) != null) {
                 String[] parts = line.split(",");
-                user.put(parts[0], parts[1]);
+                appointment.put(parts[0], parts[1]);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,13 +29,18 @@ public class AdminBook {
         }
     }
 
-    public void save(String password, String user) {
-        if (password != "") {
+    public int save(String date, String patient, String doctor, String specialty) {
+        if (date != "") {
             FileWriter fw = null;
             try {
                 fw = new FileWriter(inputFile, true);
                 bf = new BufferedWriter(fw);
-                bf.write(password + "," + user + "\n");
+                bf.write(date + "," + patient + "," + doctor + "," + specialty + "\n");
+                System.out.println("Cita confirmada ");
+                System.out.println("Fecha: " + date);
+                System.out.println("Paciente: " + patient);
+                System.out.println("Doctor: " + doctor);
+                System.out.println("Especialidad: " + specialty);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -47,15 +52,25 @@ public class AdminBook {
                     System.out.println(e.getMessage());
                 }
             }
-        }else{}
-    }
-    public int login(String password){
-        if (user.containsKey(password)) {
-            System.out.println("Sesión iniciada");
             return 1;
-        } else {
-            System.out.println("Usuario incorrecto");
+        }else{
+            System.out.println("Tiene que ingresar una fecha");
             return 0;
+        }
+    }
+
+    public void list(){
+        System.out.println("Pacientes:");
+        for (String i : appointment.keySet()) {
+            System.out.println("Paciente " + appointment.get(i) + " celular: " + i);
+        }
+    }
+    public String check(String name){
+        if (appointment.containsKey(name)) {
+            System.out.println("Ya está ocupada esa fecha, por favor elija otra");
+            return "0";
+        } else {
+            return "1";
         }
     }
 

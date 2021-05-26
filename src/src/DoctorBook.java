@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class AdminBook {
-    final static  String inputFilePath = "src/src/admin.txt";
-    HashMap<String, String> user = new HashMap<String, String>();
+public class DoctorBook {
+    final static  String inputFilePath = "src/src/doctor.txt";
+    HashMap<String, String> doctor = new HashMap<String, String>();
     File inputFile = new File(inputFilePath);
     BufferedWriter bf = null;
     BufferedReader bfReader = null;
@@ -14,7 +14,7 @@ public class AdminBook {
             String line;
             while ((line = bfReader.readLine()) != null) {
                 String[] parts = line.split(",");
-                user.put(parts[0], parts[1]);
+                doctor.put(parts[0], parts[1]);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,13 +29,13 @@ public class AdminBook {
         }
     }
 
-    public void save(String password, String user) {
-        if (password != "") {
+    public void save(String doctor, String speciality) {
+        if (doctor != "") {
             FileWriter fw = null;
             try {
                 fw = new FileWriter(inputFile, true);
                 bf = new BufferedWriter(fw);
-                bf.write(password + "," + user + "\n");
+                bf.write(doctor + "," + speciality + "\n");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -49,13 +49,21 @@ public class AdminBook {
             }
         }else{}
     }
-    public int login(String password){
-        if (user.containsKey(password)) {
-            System.out.println("Sesión iniciada");
-            return 1;
+
+    public void list(){
+        System.out.println("Doctores:");
+        for (String i : doctor.keySet()) {
+            System.out.println("Doctor " + i + " especialidad: " + doctor.get(i));
+        }
+    }
+
+    public String check(String name){
+        if (doctor.containsKey(name)) {
+            String specialty = doctor.get(name);
+            return specialty;
         } else {
-            System.out.println("Usuario incorrecto");
-            return 0;
+            System.out.println("No se encontró al doctor");
+            return "0";
         }
     }
 
