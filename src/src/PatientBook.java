@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class DoctorBook {
-    final static  String inputFilePath = "src/src/doctor.txt";
-    HashMap<String, String> doctor = new HashMap<String, String>();
+public class PatientBook {
+    final static  String inputFilePath = "src/src/patient.txt";
+    HashMap<String, String> patient = new HashMap<String, String>();
     File inputFile = new File(inputFilePath);
     BufferedWriter bf = null;
     BufferedReader bfReader = null;
@@ -14,7 +14,7 @@ public class DoctorBook {
             String line;
             while ((line = bfReader.readLine()) != null) {
                 String[] parts = line.split(",");
-                doctor.put(parts[0], parts[1]);
+                patient.put(parts[0], parts[1]);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,13 +29,13 @@ public class DoctorBook {
         }
     }
 
-    public void save(String doctor, String speciality) {
-        if (doctor != "") {
+    public void save(String phone, String name) {
+        if (phone != "") {
             FileWriter fw = null;
             try {
                 fw = new FileWriter(inputFile, true);
                 bf = new BufferedWriter(fw);
-                bf.write(doctor + "," + speciality + "\n");
+                bf.write(phone + "," + name + "\n");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -51,9 +51,9 @@ public class DoctorBook {
     }
 
     public void list(){
-        System.out.println("Doctores:");
-        for (String i : doctor.keySet()) {
-            System.out.println("Doctor " + i + " especialidad: " + doctor.get(i));
+        System.out.println("Pacientes:");
+        for (String i : patient.keySet()) {
+            System.out.println("Paciente " + patient.get(i) + " celular: " + i);
         }
     }
 
