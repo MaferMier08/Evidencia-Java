@@ -35,7 +35,7 @@ public class DoctorBook {
             try {
                 fw = new FileWriter(inputFile, true);
                 bf = new BufferedWriter(fw);
-                bf.write(doctor + "," + doctor + "\n");
+                bf.write(doctor + "," + speciality + "\n");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -51,9 +51,9 @@ public class DoctorBook {
     }
 
     public void list(){
-        System.out.println("Contactos:");
+        System.out.println("Doctores:");
         for (String i : doctor.keySet()) {
-            System.out.println("Doctor " + doctor.get(i) + " especialidad: " + i);
+            System.out.println("Doctor " + i + " especialidad: " + doctor.get(i));
         }
     }
 

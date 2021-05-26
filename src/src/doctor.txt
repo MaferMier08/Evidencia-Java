@@ -1,6 +1,4 @@
-oftalmólogo,Fer
-Pediatra,Mafer
-Ginecologa,Mier
-Pediatra,Fernández
-Ginecologa,Pepe
-Bebe,Bebe
+Marla,Ortodoncista
+Mafer,Pediatra
+Fer,Cardiologa
+Mier ,Oncologo
